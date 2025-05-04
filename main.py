@@ -14,15 +14,24 @@ app=Flask(__name__)
 def home():
     return render_template("home.html")
 
+@app.route("/")
+def suma():
+    return render_template("suma.html")
+
 
 @app.route("/suma")
 def ruta_suma():
     num1=request.args.get("num1",type=float)
     num2=request.args.get("num2",type=float)
+    
     if num1 is None or num2 is None:
-        return "faltan datos"
+        num1=random.randint(1,100)
+        num2=random.randint(1,100)
+        return f"la suma de num1 y num2 generados aleatoriamente es {sumar(num1,num2)}"
+    
+    else:
 
-    return f"la suma de num1 y num2 es {sumar(num1,num2)}"
+        return f"la suma de num1 y num2 es {sumar(num1,num2)}"
 
 
 @app.route("/resta")
